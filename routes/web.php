@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +18,21 @@ Route::get('/', function () {
     return view('index', [
         'title' => 'Login Page'
     ]);
-});
+})->name('login');
 
 Route::get('/info', function (){
     return view('info', [
         'title' => 'Info Page'
     ]);
 });
+
+
+
+
+Route::get('/dashboard', function(){
+    return 'berhasil login';
+})->middleware('auth');
+
+// login route
+Route::post('/', [AccountController::class, 'authenticate']);
+Route::post('/logout', [AccountController::class, 'logout']);

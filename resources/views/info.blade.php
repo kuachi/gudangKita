@@ -2,7 +2,7 @@
 
 @section('container')
 
-<section style="background-color: rgb(245, 245, 245);margin-top: 50px">
+<section style="background-color: rgb(245, 245, 245);margin-top: 30px">
 <div class="container py-5 px-5">
 
     {{-- left column > img --}}
