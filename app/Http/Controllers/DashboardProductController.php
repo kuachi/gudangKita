@@ -15,7 +15,11 @@ class DashboardProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.products.index', [
+            'title' => 'All porducts',
+            'products' => Product::all(),
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -100,13 +104,5 @@ class DashboardProductController extends Controller
     {
         Product::destroy( $product->id );
         return redirect('/dashboard/products')->with('success', 'A product has been deleted!');
-    }
-
-
-    public function showProducts(){        
-        return view('dashboard.products.index', [
-            'title' => 'Products',
-            'products' => Product::all()
-        ]);
     }
 }

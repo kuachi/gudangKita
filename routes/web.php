@@ -45,6 +45,3 @@ Route::post('/logout', [AccountController::class, 'logout']);
 
 // products resource
 Route::resource('/dashboard/products', DashboardProductController::class)->middleware('auth');
-
-// show all products
-Route::get('/dashboard/products', [DashboardProductController::class, 'showProducts'])->middleware('auth');
