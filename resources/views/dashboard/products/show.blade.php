@@ -7,79 +7,39 @@
     <div class="col-lg-3 ms-auto order-lg-1" style="background-color: rgb(245, 245, 245);margin-top: 30px"">
         <aside class="py-4 px-1">
             <span>
-                <h5 class="fw-bold">Add new product</h5>
+                <h5 class="fw-bold">Product Details</h5>
             </span>
             <hr>
 
-            <form action="/dashboard/products" method="post">
-                @csrf
-                <div class="input mb-3">
-                    <input type="text" name="name" id="name" class="form-control form-control @error('name') is-invalid @enderror" placeholder="name" autofocus value="{{ old('name') }}">
-                    @error('name')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
+            <div class="text-center mb-3">
+                <img src="{{ $productShow->image }}" alt="" class="img-thumbnail">
+            </div>
+            <div class="input mb-3">
+                <input type="text" name="name" id="name" class="disable form-control" placeholder="name" value="{{ $productShow->name }}" @disabled(true)>
+            </div>
 
-                <div class="input mb-3">
-                    <input type="text" name="slug" id="slug" class="form-control form-control @error('slug') is-invalid @enderror" placeholder="slug" value="{{ old('slug') }}">
-                    @error('slug')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
+            <div class="input mb-3">
+                <input type="text" name="slug" id="slug" class="form-control" placeholder="slug" value="{{ $productShow->slug }}" @disabled(true)>
+            </div>
 
-                <div class="input mb-3">
-                    <input type="text" name="produsen" id="produsen" class="form-control @error('produsen') is-invalid @enderror" placeholder="produsen" value="{{ old('produsen') }}">
-                    @error('produsen')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
+            <div class="input mb-3">
+                <input type="text" name="produsen" id="produsen" class="form-control" placeholder="produsen" value="{{ $productShow->produsen }}" @disabled(true)>
+            </div>
 
-                <div class="input-group mb-3">
-                    <input type="text" name="stock" id="stock" class="form-control form-control @error('stock') is-invalid @enderror" placeholder="stock" value="{{ old('stock') }}">
-                    @error('stock')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
+            <div class="input-group mb-3">
+                <input type="text" name="stock" id="stock" class="form-control form-control" placeholder="stock" value="{{ $productShow->stock }}" @disabled(true)>
 
-                    <input type="text" name="unit" id="unit" class="form-control form-control @error('unit') is-invalid @enderror" placeholder="unit" value="{{ old('unit') }}">
-                    @error('unit')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
+                <input type="text" name="unit" id="unit" class="form-control form-control" placeholder="unit" value="{{ $productShow->unit }}" @disabled(true)>
+            </div>
 
-                <div class="input mb-3">
-                    <input type="text" name="price" id="price" class="form-control form-control @error('price') is-invalid @enderror" placeholder="price" value="{{ old('price') }}">
-                    @error('price')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-    
-    
-                <div class="mb-2">
-                    <label for="category_id" class="form-label">Category</label>
-                    <select class="form-select" name="category_id">
-                        @foreach ($categories as $category)
-                            @if ( old('category_id' == $category->id) )
-                                <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-                            @else
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Add product</button>
-            </form>
+            <div class="input mb-3">
+                <input type="text" name="price" id="price" class="form-control form-control" placeholder="price" value="@currency($productShow['price'])" @disabled(true)>
+            </div>
+
+            <div class="input mb-3">
+                <input type="text" name="price" id="price" class="form-control form-control" placeholder="price" value="{{ $productShow->category->name }}" @disabled(true)>
+            </div>
+            <a href="/dashboard/products" class="btn btn-primary">Back</a>
             
         </aside>
     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class DashboardProductController extends Controller
@@ -17,7 +18,7 @@ class DashboardProductController extends Controller
     {
         return view('dashboard.products.index', [
             'title' => 'All porducts',
-            'products' => Product::all(),
+            'products' => Product::orderBy('category_id')->get(),
             'categories' => Category::all()
         ]);
     }
@@ -31,7 +32,7 @@ class DashboardProductController extends Controller
     {
         return view('dashboard.products.create', [
             'title' => 'Add porduct',
-            'products' => Product::all(),
+            'products' => Product::orderBy('category_id')->get(),
             'categories' => Category::all()
         ]);
     }
@@ -68,7 +69,12 @@ class DashboardProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('dashboard.products.show', [
+            'title' => $product->name,
+            'products' => Product::orderBy('category_id')->get(),
+            'categories' => Category::all(),
+            'productShow' => $product
+        ]);
     }
 
     /**
