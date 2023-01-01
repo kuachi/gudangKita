@@ -128,4 +128,20 @@
 
     
 </div>
+
+
+<script>
+    const name = document.querySelector('#name');
+    const slug = document.querySelector('#slug');
+
+    name.addEventListener('change', function(){
+        // fetch('/dashboard/products/checkCode?name=' + name.value)
+        //     .then(response => response.json())
+        //     .then(data => slug.value = data.slug)
+        fetch('/dashboard/products/checkSlug?name='+name.value)
+            .then( response => response.json() )
+            .then( data => slug.value = data.slug );
+
+    });
+</script>
 @endsection
