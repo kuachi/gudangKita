@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <div class="container d-flex">
-      <a class="navbar-brand fw-bold" href="/">Gudang Kita</a>
+      <a class="navbar-brand fw-bold" href="/">GudangKita</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
