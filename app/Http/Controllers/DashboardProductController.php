@@ -83,7 +83,8 @@ class DashboardProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Product::destroy( $product->id );
+        return redirect('/dashboard/products')->with('success', 'A product has been deleted!');
     }
 
 
