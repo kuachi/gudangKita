@@ -15,31 +15,42 @@
                 <img src="{{ $productShow->image }}" alt="" class="img-thumbnail">
             </div>
             <div class="input mb-3">
+                <label for="name" style="font-size: 14px;">Name</label>
                 <input type="text" name="name" id="name" class="disable form-control" placeholder="name" value="{{ $productShow->name }}" @disabled(true)>
             </div>
 
             <div class="input mb-3">
+                <label for="name" style="font-size: 14px;">Product Code :</label>
                 <input type="text" name="slug" id="slug" class="form-control" placeholder="slug" value="{{ $productShow->slug }}" @disabled(true)>
             </div>
 
             <div class="input mb-3">
+                <label for="name" style="font-size: 14px;">Produsen</label>
                 <input type="text" name="produsen" id="produsen" class="form-control" placeholder="produsen" value="{{ $productShow->produsen }}" @disabled(true)>
             </div>
 
-            <div class="input-group mb-3">
+            <div class="input mb-3">
+                <label for="name" style="font-size: 14px;">Stock :</label>
                 <input type="text" name="stock" id="stock" class="form-control form-control" placeholder="stock" value="{{ $productShow->stock }}" @disabled(true)>
 
+            </div>
+            
+            <div class="input mb-3">
+                <label for="name" style="font-size: 14px;">Unit :</label>
                 <input type="text" name="unit" id="unit" class="form-control form-control" placeholder="unit" value="{{ $productShow->unit }}" @disabled(true)>
+
             </div>
 
             <div class="input mb-3">
+                <label for="name" style="font-size: 14px;">Price ;</label>
                 <input type="text" name="price" id="price" class="form-control form-control" placeholder="price" value="@currency($productShow['price'])" @disabled(true)>
             </div>
 
             <div class="input mb-3">
+                <label for="name" style="font-size: 14px;">Category :</label>
                 <input type="text" name="price" id="price" class="form-control form-control" placeholder="price" value="{{ $productShow->category->name }}" @disabled(true)>
             </div>
-            <a href="/dashboard/products" class="btn btn-primary">Back</a>
+            <a href="/dashboard/products" class="btn btn-primary w-100">Back</a>
             
         </aside>
     </div>

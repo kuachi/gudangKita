@@ -1,6 +1,11 @@
 @extends('dashboard.partials.main')
 
 @section('container')
+
+@if( session()->has('success') )
+    @include('dashboard.partials.modal')
+@endif
+
 <div class="row">
 
     {{-- add new product --}}
@@ -22,14 +27,14 @@
                     @enderror
                 </div>
 
-                <div class="input mb-3">
+                {{-- <div class="input mb-3">
                     <input type="text" name="slug" id="slug" class="form-control form-control @error('slug') is-invalid @enderror" placeholder="slug" value="{{ old('slug') }}">
                     @error('slug')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                     @enderror
-                </div>
+                </div> --}}
 
                 <div class="input mb-3">
                     <input type="text" name="produsen" id="produsen" class="form-control @error('produsen') is-invalid @enderror" placeholder="produsen" value="{{ old('produsen') }}">
@@ -78,7 +83,7 @@
                         @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Add product</button>
+                <button type="submit" class="btn btn-primary w-100">Add product</button>
             </form>
             
         </aside>
@@ -143,5 +148,8 @@
             .then( data => slug.value = data.slug );
 
     });
+
+
+
 </script>
 @endsection

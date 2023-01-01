@@ -47,20 +47,36 @@ class DashboardProductController extends Controller
      */
     public function store(Request $request)
     {
+        
+
         $rules = [
             'category_id' => 'required',
             'name' =>'required',
-            'slug' => 'required|unique:products',
             'produsen' => 'required',
             'stock' => 'required',
             'unit' => 'required',
             'price' => 'required'
         ];
-
+        
         $validatedData = $request->validate($rules);
-        Product::create($validatedData);
+        
+        $newSlug = $request->name;
+        $newSlug = strtolower($newSlug);
+        
+        // // replace space with -
+        $newSlug = str_replace(' ', '-', $newSlug);
+        
+        // adding minute to slug
+        $newSlug = $newSlug . "-" . now()->format('i');
 
-        return redirect('/dashboard/products')->with('success', 'New product has been added!');
+        $validatedData['slug'] = $newSlug;
+
+        if(Product::create($validatedData)){
+            return redirect('/dashboard/products')->with('success', 'New product has been added!');
+        } else{
+            return redirect('/dashboard/products/create')->with('success', 'New product failed to added!');
+        }
+
     }
 
     /**
