@@ -21,13 +21,24 @@
         </ul>
 
         <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/products"><i class="bi bi-person-circle"></i> Add Users</a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/products"><i class="bi bi-person-circle"></i> Add Users</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ Request::is('dashboard/products') ? 'active' : '' }}" href="/dashboard/products"><i class="bi bi-view-list"></i> Products</a>
-          </li>
+            @auth
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-view-list"></i> Products</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/dashboard/products"><i class="bi bi-view-list"></i> All products</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/dashboard/products/create"><i class="bi bi-plus-circle"></i> Add product</a></li>
+                </ul>
+              </li>
+              @endauth
+          </ul>
+
+          
           <li class="nav-item">
             <a class="nav-link {{ Request::is('info') ? 'active' : '' }}" href="/info"><i class="bi bi-info-circle"></i> Info</a>
           </li>

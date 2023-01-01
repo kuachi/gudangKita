@@ -25,7 +25,8 @@ class DashboardProductController extends Controller
     public function create()
     {
         return view('dashboard.products.create', [
-            'title' => 'Add porduct'
+            'title' => 'Add porduct',
+            'products' => Product::all()
         ]);
     }
 
