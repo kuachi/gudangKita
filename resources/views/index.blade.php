@@ -30,18 +30,16 @@
             <form action="/" method="post">
             @csrf
 
+                <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                <p class="lead fw-normal mb-0 me-3">Sign in</p>
+                </div>
+                <div class="divider d-flex align-items-center my-4"></div>
                 @if (session()->has('loginError'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{ session('loginError') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-
-                <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                <p class="lead fw-normal mb-0 me-3">Sign in</p>
-                </div>
-                <div class="divider d-flex align-items-center my-4">
-                </div>
     
                 <!-- Email input -->
                 <div class="form-outline mb-4">

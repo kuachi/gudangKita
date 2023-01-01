@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('index', [
         'title' => 'Login Page'
     ]);
-})->name('login');
+})->name('login')->middleware('guest');
 
 Route::get('/info', function (){
     return view('info', [
@@ -28,10 +28,13 @@ Route::get('/info', function (){
 
 
 
-
+// dashboard route
 Route::get('/dashboard', function(){
-    return 'berhasil login';
+    return view('dashboard.index', [
+        'title' => 'Dashboard'
+    ]);
 })->middleware('auth');
+
 
 // login route
 Route::post('/', [AccountController::class, 'authenticate']);

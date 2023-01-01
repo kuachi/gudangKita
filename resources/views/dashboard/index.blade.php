@@ -1,0 +1,5 @@
+@extends('dashboard.partials.main')
+
+@section('container')
+    <h1>Dashboard</h1>
+@endsection

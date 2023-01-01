@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Muhammad rahmat Mutik',
             'username' => 'rahmat20',
             'email' => 'muhammatrahmatmutik2002@gmail.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'image' => '/storage/images/rahmat.png'
         ]);
     }
 
