@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->string('unit');
             $table->integer('price');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

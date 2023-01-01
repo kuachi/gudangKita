@@ -48,9 +48,75 @@
             </span>
             <hr>
 
-            <div class="input mb-3">
-                <input type="text" name="name" id="name" class="form-control" placeholder="name">
-            </div>
+            <form action="/dashboard/products" method="post">
+                @csrf
+                <div class="input mb-3">
+                    <input type="text" name="name" id="name" class="form-control form-control @error('name') is-invalid @enderror" placeholder="name" autofocus value="{{ old('name') }}">
+                    @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="input mb-3">
+                    <input type="text" name="slug" id="slug" class="form-control form-control @error('slug') is-invalid @enderror" placeholder="slug" value="{{ old('slug') }}">
+                    @error('slug')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="input mb-3">
+                    <input type="text" name="produsen" id="produsen" class="form-control @error('produsen') is-invalid @enderror" placeholder="produsen" value="{{ old('produsen') }}">
+                    @error('produsen')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="text" name="stock" id="stock" class="form-control form-control @error('stock') is-invalid @enderror" placeholder="stock" value="{{ old('stock') }}">
+                    @error('stock')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+
+                    <input type="text" name="unit" id="unit" class="form-control form-control @error('unit') is-invalid @enderror" placeholder="unit" value="{{ old('unit') }}">
+                    @error('unit')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="input mb-3">
+                    <input type="text" name="price" id="price" class="form-control form-control @error('price') is-invalid @enderror" placeholder="price" value="{{ old('price') }}">
+                    @error('price')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+    
+    
+                <div class="mb-2">
+                    <label for="category_id" class="form-label">Category</label>
+                    <select class="form-select" name="category_id">
+                        @foreach ($categories as $category)
+                            @if ( old('category_id' == $category->id) )
+                                <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                            @else
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add product</button>
+            </form>
             
         </aside>
     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class DashboardProductController extends Controller
@@ -26,7 +27,8 @@ class DashboardProductController extends Controller
     {
         return view('dashboard.products.create', [
             'title' => 'Add porduct',
-            'products' => Product::all()
+            'products' => Product::all(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -38,7 +40,20 @@ class DashboardProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'category_id' => 'required',
+            'name' =>'required',
+            'slug' => 'required|unique:products',
+            'produsen' => 'required',
+            'stock' => 'required',
+            'unit' => 'required',
+            'price' => 'required'
+        ];
+
+        $validatedData = $request->validate($rules);
+        Product::create($validatedData);
+
+        return redirect('/dashboard/products')->with('success', 'New product has been added!');
     }
 
     /**
