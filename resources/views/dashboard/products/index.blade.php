@@ -15,6 +15,7 @@
                 <th style="width: 15px">No</th>
                 <th>Name</th>
                 <th>Category</th>
+                <th>Produsen</th>
                 <th>Amount</th>
                 <th>Price</th>
                 <th>Action</th>
@@ -27,6 +28,7 @@
                 <td class="filterable-cell">{{ $loop->iteration }}</td>
                 <td class="filterable-cell">{{ $product->name }}</td>
                 <td class="filterable-cell">{{ $product->Category->name }}</td>
+                <td class="filterable-cell">{{ $product->produsen }}</td>
                 <td class="filterable-cell">{{ $product->stock }}</td>
                 <td class="filterable-cell">@currency( $product['price'] )</td>
                 <td>
