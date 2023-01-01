@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,6 +42,27 @@ class DatabaseSeeder extends Seeder
             'unit' => 'Karung',
             'price' => 225000,
             'image' => '/storage/images/products/bulog.png'
+        ]);
+
+
+
+
+
+
+
+        Category::create([
+            'name' =>'Kebutuhan Rumah Tangga',
+            'slug' => 'kebutuhan-rumah-tangga',
+        ]);
+
+        Category::create([
+            'name' =>'Sembako',
+            'slug' => 'sembako',
+        ]);
+
+        Category::create([
+            'name' =>'Obat-obatan',
+            'slug' => 'obat-obatan',
         ]);
 
         // kategori

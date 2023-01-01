@@ -20,7 +20,7 @@
             <tr>
                 <td class="filterable-cell">{{ $loop->iteration }}</td>
                 <td class="filterable-cell">{{ $product->name }}</td>
-                <td class="filterable-cell">Blue</td>
+                <td class="filterable-cell">{{ $product->Category->name }}</td>
                 <td class="filterable-cell">{{ $product->stock }}</td>
                 <td class="filterable-cell">@currency( $product['price'] )</td>
                 <td>

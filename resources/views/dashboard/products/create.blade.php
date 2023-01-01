@@ -14,13 +14,14 @@
                 <th>Action</th>
             </tr>
             </thead>
+
             <tbody style="height: 10px !important; overflow: scroll; ">
             
             @foreach ($products as $product)    
             <tr>
                 <td class="filterable-cell">{{ $loop->iteration }}</td>
                 <td class="filterable-cell">{{ $product->name }}</td>
-                <td class="filterable-cell">Blue</td>
+                <td class="filterable-cell">{{ $product->category->name }}</td>
                 <td class="filterable-cell">{{ $product->stock }}</td>
                 <td class="filterable-cell">@currency( $product['price'] )</td>
                 <td>
@@ -46,8 +47,9 @@
                 <h5 class="fw-bold">Add new product</h5>
             </span>
             <hr>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+
+            <div class="input mb-3">
+                <input type="text" name="name" id="name" class="form-control" placeholder="name">
             </div>
             
         </aside>
