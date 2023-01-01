@@ -23,7 +23,7 @@
         <ul class="navbar-nav ms-auto">
 
           <li class="nav-item">
-            <a class="nav-link {{ Request::is('dashboard/products') ? 'active' : '' }}" href="/dashboard/products"><i class="bi bi-person-circle"></i> Add Users</a>
+            <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/products"><i class="bi bi-person-circle"></i> Add Users</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ Request::is('dashboard/products') ? 'active' : '' }}" href="/dashboard/products"><i class="bi bi-view-list"></i> Products</a>

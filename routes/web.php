@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +39,12 @@ Route::get('/dashboard', function(){
 
 
 // login route
-Route::post('/', [AccountController::class, 'authenticate']);
+Route::post('/', [AccountController::class, 'authenticate'])->middleware('guest');
 Route::post('/logout', [AccountController::class, 'logout']);
+
+
+// products resource
+Route::resource('/dashboard/products', DashboardProductController::class)->middleware('auth');
+
+// show all products
+Route::get('/dashboard/products', [DashboardProductController::class, 'showProducts'])->middleware('auth');
