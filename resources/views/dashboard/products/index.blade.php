@@ -1,6 +1,12 @@
 @extends('dashboard.partials.main')
 
 @section('container')
+
+@if( session()->has('success') )
+    @include('dashboard.partials.modal')
+@endif
+
+
 <div class="row">
     <div class="col-lg-12">
         <table class="table table-striped" style="font-size: 14px">
@@ -41,4 +47,15 @@
         </table>
     </div>
 </div>
+
+<script>
+
+    // tutup modal notifikasi
+    document.querySelector('#notification-modal').addEventListener('click', evt => {
+        if( !evt.target.matches('button') ) return;
+        const button = document.querySelector('#notification-modal');
+        button.classList.remove('show', 'd-block');
+    })
+
+</script>
 @endsection
