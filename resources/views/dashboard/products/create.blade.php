@@ -9,7 +9,7 @@
 <div class="row">
 
     {{-- add new product --}}
-    <div class="col-lg-3 ms-auto order-lg-1" style="background-color: rgb(245, 245, 245);margin-top: 30px"">
+    <div class="col-lg-3 ms-auto order-lg-1" style="background-color: rgb(245, 245, 245);margin-top: 30px">
         <aside class="py-4 px-1">
             <span>
                 <h5 class="fw-bold">Add new product</h5>

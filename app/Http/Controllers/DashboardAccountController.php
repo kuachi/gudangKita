@@ -14,8 +14,10 @@ class DashboardAccountController extends Controller
      */
     public function index()
     {
-
-        
+        return view('dashboard.users.index', [
+            'title' => 'User Page',
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -25,10 +27,7 @@ class DashboardAccountController extends Controller
      */
     public function create()
     {
-        return view('dashboard.users.create', [
-            'title' => 'User Page',
-            'users' => User::all()
-        ]);
+        
     }
 
     /**
@@ -57,7 +56,7 @@ class DashboardAccountController extends Controller
 
         User::create($validatedData);
 
-        return redirect('/dashboard/users/create')->with('success', 'An user has been added!');
+        return redirect('/dashboard/users')->with('success', 'An user has been added!');
         
     }
 
@@ -103,6 +102,7 @@ class DashboardAccountController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+        return redirect('/dashboard/users/')->with('success', 'An user has been deleted');
     }
 }

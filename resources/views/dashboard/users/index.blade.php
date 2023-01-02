@@ -108,5 +108,14 @@
 
     
 </div>
+<script>
 
+    // tutup modal notifikasi
+    document.querySelector('#notification-modal').addEventListener('click', evt => {
+        if( !evt.target.matches('button') ) return;
+        const button = document.querySelector('#notification-modal');
+        button.classList.remove('show', 'd-block');
+    })
+
+</script>
 @endsection
