@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardProductController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,3 +45,6 @@ Route::post('/logout', [AccountController::class, 'logout']);
 
 // products resource
 Route::resource('/dashboard/products', DashboardProductController::class)->middleware('auth');
+
+// categories resource
+Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth');

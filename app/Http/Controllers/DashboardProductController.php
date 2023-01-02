@@ -6,6 +6,7 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class DashboardProductController extends Controller
@@ -110,7 +111,13 @@ class DashboardProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $product['image'] = "/storage/" . $product['image'];
+        return view('dashboard.products.edit', [
+            'title' => 'Edit data',
+            'productEdit' => $product,
+            'products' => Product::orderBy('category_id')->get(),
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -122,7 +129,24 @@ class DashboardProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+
+        $rules = [
+            'category_id' => 'required',
+            'name' =>'required',
+            'produsen' => 'required',
+            'stock' => 'required',
+            'unit' => 'required',
+            'price' => 'required',
+        ];
+
+
+        $validatedData = $request->validate($rules);
+
+
+        Product::where('id', $product->id)
+            ->update($validatedData);
+
+        return redirect('/dashboard/products')->with('success', 'A product has been updated!');
     }
 
     /**
