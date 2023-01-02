@@ -48,7 +48,7 @@ Route::post('/logout', [AccountController::class, 'logout']);
 Route::resource('/dashboard/products', DashboardProductController::class)->middleware('auth');
 
 // categories resource
-Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth')->except('show');
+Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth')->except(['show', 'create']);
 
 // users resource
 Route::resource('/dashboard/users', DashboardAccountController::class)->middleware('auth')->except('create');

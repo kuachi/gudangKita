@@ -12,21 +12,22 @@
     <div class="col-lg-3 ms-auto order-lg-1" style="background-color: rgb(245, 245, 245);margin-top: 30px">
         <aside class="py-4 px-1">
             <span>
-                <h5 class="fw-bold">Add new category</h5>
+                <h5 class="fw-bold">Edit category</h5>
             </span>
             <hr>
 
-            <form action="/dashboard/categories" method="post">
+            <form action="/dashboard/categories/{{ $categoryEdit->slug }}" method="post">
+                @method('put')
                 @csrf
                 <div class="input mb-3">
-                    <input type="text" name="name" id="name" class="form-control form-control @error('name') is-invalid @enderror" placeholder="name" autofocus value="{{ old('name') }}">
+                    <input type="text" name="name" id="name" class="form-control form-control @error('name') is-invalid @enderror" placeholder="name" autofocus value="{{ old('name', $categoryEdit->name) }}">
                     @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Add category</button>
+                <button type="submit" class="btn btn-primary w-100">Update category</button>
             </form>
             
         </aside>

@@ -7,7 +7,7 @@
         <ul class="navbar-nav">
           @auth
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle {{ Request::is('dashboard') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{ auth()->user()->image }}" alt="" class="rounded-circle img-fluid" style="width: 30px">  {{ auth()->user()->name }}
               </a>
               <ul class="dropdown-menu">

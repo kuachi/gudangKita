@@ -15,12 +15,9 @@ class DashboardCategoryController extends Controller
      */
     public function index()
     {
-        
-
         return view('dashboard.categories.index', [
             'title' => 'Category',
             'categories' => Category::all(),
-            'products' => Product::all(),
         ]);
     }
 
@@ -42,7 +39,26 @@ class DashboardCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required'
+        ];
+
+        $validatedData = $request->validate($rules);
+        $newSlug = $validatedData['name'];
+
+        // make lowercase
+        $newSlug = strtolower($newSlug);
+
+        // replace space
+        $newSlug = str_replace(' ', '-', $newSlug);
+
+        $validatedData['slug'] = $newSlug . '-' .now()->format('i');
+        
+        Category::create($validatedData);
+
+        return redirect('/dashboard/categories')->with('success', 'A new categories has been added!');
+
+        
     }
 
     /**
@@ -53,7 +69,7 @@ class DashboardCategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        
     }
 
     /**
@@ -64,7 +80,11 @@ class DashboardCategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dashboard.categories.edit', [
+            'title' => 'Category',
+            'categoryEdit' => $category,
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -76,7 +96,25 @@ class DashboardCategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $rules = [
+            'name' => 'required'
+        ];
+
+        $validatedData = $request->validate($rules);
+        $newSlug = $validatedData['name'];
+
+        // make lowercase
+        $newSlug = strtolower($newSlug);
+
+        // replace space
+        $newSlug = str_replace(' ', '-', $newSlug);
+
+        $validatedData['slug'] = $newSlug . '-' .now()->format('i');
+
+        Category::where('id', $category->id)
+            ->update($validatedData);
+
+        return redirect('/dashboard/categories')->with('success', 'A category has been changed');
     }
 
     /**
@@ -87,6 +125,8 @@ class DashboardCategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+
+        return redirect('/dashboard/categories')->with('success', 'A category has been deleted!');
     }
 }

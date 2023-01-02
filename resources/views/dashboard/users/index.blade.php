@@ -45,7 +45,7 @@
             </div>
 
             <div class="input-group mb-3">
-                <input type="text" name="password" id="password" class="form-control form-control @error('password') is-invalid @enderror" placeholder="password" value="{{ old('password') }}">
+                <input type="password" name="password" id="password" class="form-control form-control @error('password') is-invalid @enderror" placeholder="password" value="{{ old('password') }}">
                 @error('password')
                 <div class="invalid-feedback">
                     {{ $message }}
