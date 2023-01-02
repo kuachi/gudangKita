@@ -68,7 +68,11 @@ class DashboardAccountController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('dashboard.users.show', [
+            'title' => 'Show users details',
+            'userShow' => $user,
+            'users' => User::all()
+        ]);
     }
 
     /**
