@@ -13,11 +13,12 @@
     
     
     @include('dashboard.partials.navbar')
+
     
+
     <div class="container mt-5 py-4">
       @yield('container') 
     </div>
-    
     
     
     {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script> --}}
