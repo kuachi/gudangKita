@@ -17,6 +17,7 @@
                 <th>Category</th>
                 <th>Produsen</th>
                 <th>Amount</th>
+                <th>Unit</th>
                 <th>Price</th>
                 <th>Action</th>
             </tr>
@@ -30,6 +31,7 @@
                 <td class="filterable-cell">{{ $product->Category->name }}</td>
                 <td class="filterable-cell">{{ $product->produsen }}</td>
                 <td class="filterable-cell">{{ $product->stock }}</td>
+                <td class="filterable-cell">{{ $product->unit }}</td>
                 <td class="filterable-cell">@currency( $product['price'] )</td>
                 <td>
 

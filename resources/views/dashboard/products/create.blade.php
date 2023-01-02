@@ -16,7 +16,7 @@
             </span>
             <hr>
 
-            <form action="/dashboard/products" method="post">
+            <form action="/dashboard/products" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="input mb-3">
                     <input type="text" name="name" id="name" class="form-control form-control @error('name') is-invalid @enderror" placeholder="name" autofocus value="{{ old('name') }}">
@@ -70,7 +70,6 @@
                     @enderror
                 </div>
     
-    
                 <div class="mb-2">
                     <label for="category_id" class="form-label">Category</label>
                     <select class="form-select" name="category_id">
@@ -83,6 +82,16 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="input mb-3">
+                    <input type="file" name="image" id="image" class="form-control form-control @error('image') is-invalid @enderror" placeholder="image">
+                    @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
                 <button type="submit" class="btn btn-primary w-100">Add product</button>
             </form>
             
@@ -99,6 +108,7 @@
                 <th>Name</th>
                 <th>Category</th>
                 <th>Amount</th>
+                <th>Unit</th>
                 <th>Price</th>
                 <th>Action</th>
             </tr>
@@ -112,6 +122,7 @@
                 <td class="filterable-cell">{{ $product->name }}</td>
                 <td class="filterable-cell">{{ $product->category->name }}</td>
                 <td class="filterable-cell">{{ $product->stock }}</td>
+                <td class="filterable-cell">{{ $product->unit }}</td>
                 <td class="filterable-cell">@currency( $product['price'] )</td>
                 <td>
 

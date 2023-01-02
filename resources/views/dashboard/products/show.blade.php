@@ -12,7 +12,7 @@
             <hr>
 
             <div class="text-center mb-3">
-                <img src="{{ $productShow->image }}" alt="" class="img-thumbnail">
+                <img src="{{ $productShow->image }}" alt="{{ $productShow->name }}" class="img-thumbnail">
             </div>
             <div class="input mb-3">
                 <label for="name" style="font-size: 14px;">Name</label>

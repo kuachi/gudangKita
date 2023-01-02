@@ -6,7 +6,6 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class DashboardProductController extends Controller
@@ -55,10 +54,16 @@ class DashboardProductController extends Controller
             'produsen' => 'required',
             'stock' => 'required',
             'unit' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'image' => 'image|file|max:2048'
         ];
         
         $validatedData = $request->validate($rules);
+
+        // store images to folder
+        if( $request->file('image') ){
+            $validatedData['image'] = $request->file('image')->store('images/products');
+        }
         
         $newSlug = $request->name;
         $newSlug = strtolower($newSlug);
@@ -87,6 +92,8 @@ class DashboardProductController extends Controller
      */
     public function show(Product $product)
     {
+        $product['image'] = "/storage/" . $product['image'];
+        // dd($product->image);
         return view('dashboard.products.show', [
             'title' => $product->name,
             'products' => Product::orderBy('category_id')->get(),
