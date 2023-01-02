@@ -11,6 +11,7 @@ class Product extends Model
 {
     use HasFactory;
     use Sluggable;
+
     protected $guarded = ['id'];
     protected $with = ['category'];
 

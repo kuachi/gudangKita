@@ -15,10 +15,7 @@ class DashboardAccountController extends Controller
     public function index()
     {
 
-        return view('dashboard.users.index', [
-            'title' => 'User Page',
-            'users' => User::all()
-        ]);
+        
     }
 
     /**
@@ -28,7 +25,10 @@ class DashboardAccountController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.users.create', [
+            'title' => 'User Page',
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -39,7 +39,26 @@ class DashboardAccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'username' => 'required|unique:users',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'image' => 'image|file|max:2048'
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        if($request->file('image')){
+            $validatedData['image'] = $request->file('image')->store('images');
+        }
+
+        $validatedData['password'] = bcrypt($validatedData['password']);
+
+        User::create($validatedData);
+
+        return redirect('/dashboard/users/create')->with('success', 'An user has been added!');
+        
     }
 
     /**

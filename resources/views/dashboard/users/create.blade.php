@@ -16,7 +16,6 @@
         <hr>
 
         <form action="/dashboard/users" method="post" enctype="multipart/form-data">
-          @method('put')
             @csrf
             <div class="input mb-3">
                 <input type="text" name="name" id="name" class="form-control form-control @error('name') is-invalid @enderror" placeholder="name" value="{{ old('name') }}">
@@ -30,6 +29,15 @@
             <div class="input mb-3">
                 <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" placeholder="username" value="{{ old('username') }}">
                 @error('username')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+
+            <div class="input mb-3">
+                <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="email" value="{{ old('email') }}">
+                @error('email')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>

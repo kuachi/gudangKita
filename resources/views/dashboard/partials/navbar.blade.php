@@ -23,7 +23,7 @@
         <ul class="navbar-nav ms-auto">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link {{ Request::is('dashboard/users') ? 'active' : '' }}" href="/dashboard/users"><i class="bi bi-person-circle"></i> Add Users</a>
+              <a class="nav-link {{ Request::is('dashboard/users/create') ? 'active' : '' }}" href="/dashboard/users/create"><i class="bi bi-person-circle"></i> Add Users</a>
             </li>
 
             @auth

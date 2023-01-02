@@ -6,7 +6,6 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class DashboardProductController extends Controller
