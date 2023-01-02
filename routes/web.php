@@ -51,4 +51,4 @@ Route::resource('/dashboard/products', DashboardProductController::class)->middl
 Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth')->except('show');
 
 // users resource
-Route::resource('/dashboard/users', DashboardAccountController::class)->middleware('auth');
+Route::resource('/dashboard/users', DashboardAccountController::class)->middleware('auth')->except('create');
