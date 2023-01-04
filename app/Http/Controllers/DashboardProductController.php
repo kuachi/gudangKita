@@ -32,7 +32,7 @@ class DashboardProductController extends Controller
     public function create()
     {
         return view('dashboard.products.create', [
-            'title' => 'Add porduct',
+            'title' => 'Add product',
             'products' => Product::orderBy('category_id')->get(),
             'categories' => Category::all()
         ]);
@@ -52,9 +52,9 @@ class DashboardProductController extends Controller
             'category_id' => 'required',
             'name' =>'required',
             'produsen' => 'required',
-            'stock' => 'required',
+            'stock' => 'Integer|required',
             'unit' => 'required',
-            'price' => 'required',
+            'price' => 'Integer|required',
             'image' => 'image|file|max:2048'
         ];
         
@@ -76,11 +76,13 @@ class DashboardProductController extends Controller
 
         $validatedData['slug'] = $newSlug;
 
+        // dd(no);
+
         if(Product::create($validatedData)){
             return redirect('/dashboard/products')->with('success', 'New product has been added!');
-        } else{
-            return redirect('/dashboard/products/create')->with('success', 'New product failed to added!');
-        }
+        } 
+        
+        return redirect('/dashboard/products/create')->with('success', 'New product failed to added!');
 
     }
 

@@ -83,7 +83,7 @@ class DashboardAccountController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return redirect('/dashboard/users/')->with('success', 'Sorry, the page for edit user not available yet');
     }
 
     /**
