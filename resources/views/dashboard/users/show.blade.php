@@ -64,7 +64,7 @@
                 <td class="filterable-cell">{{ $user->email }}</td>
                 <td>
 
-                    <a href="/dashboard/products/{{ $user->id }}" class="badge bg-success"><i class="bi bi-info-circle px-1 py-1 fs-6"></i></a>
+                    <a href="/dashboard/users/{{ $user->id }}" class="badge bg-success"><i class="bi bi-info-circle px-1 py-1 fs-6"></i></a>
                     <a href="/dashboard/users/{{ $user->id }}/edit" class="badge bg-warning"><i class="bi bi-pencil-square px-1 py-1 fs-6"></i></a>
                     <form action="/dashboard/users/{{ $user->id }}" method="post" class="d-inline">
                         @method('delete')
