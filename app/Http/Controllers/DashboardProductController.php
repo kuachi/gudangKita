@@ -7,6 +7,7 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardProductController extends Controller
 {
@@ -46,7 +47,7 @@ class DashboardProductController extends Controller
      */
     public function store(Request $request)
     {
-        
+
 
         $rules = [
             'category_id' => 'required',
@@ -57,20 +58,20 @@ class DashboardProductController extends Controller
             'price' => 'Integer|required',
             'image' => 'image|file|max:2048'
         ];
-        
+
         $validatedData = $request->validate($rules);
 
         // store images to folder
         if( $request->file('image') ){
             $validatedData['image'] = $request->file('image')->store('images/products');
         }
-        
+
         $newSlug = $request->name;
         $newSlug = strtolower($newSlug);
-        
+
         // // replace space with -
         $newSlug = str_replace(' ', '-', $newSlug);
-        
+
         // adding minute to slug
         $newSlug = $newSlug . "-" . now()->format('i');
 
@@ -80,8 +81,8 @@ class DashboardProductController extends Controller
 
         if(Product::create($validatedData)){
             return redirect('/dashboard/products')->with('success', 'New product has been added!');
-        } 
-        
+        }
+
         return redirect('/dashboard/products/create')->with('success', 'New product failed to added!');
 
     }
@@ -165,5 +166,28 @@ class DashboardProductController extends Controller
     public function checkSlug( Request $request ){
         $slug = SlugService::createSlug(Product::class, 'slug', $request->name);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function get(Request $request)
+    {
+        $data = DB::table('products')->where('name', 'LIKE', "%$request->search%")->get(['plu', 'name']);
+        $kategori = $data->map(function ($value) {
+            return [
+                'id' => $value->plu,
+                'text' => $value->name,
+            ];
+        });
+
+        return response()->json([
+            'data' => $kategori
+        ], 200);
+    }
+
+    public function getDetail(Request $request)
+    {
+        $produk = DB::table('products')->where('plu', $request->plu)->first();
+        return response()->json([
+            'data' => $produk
+        ], 200);
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardAccountController;
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\Inventory\BarangMasukController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,3 +53,13 @@ Route::resource('/dashboard/categories', DashboardCategoryController::class)->mi
 
 // users resource
 Route::resource('/dashboard/users', DashboardAccountController::class)->middleware('auth')->except('create');
+
+
+
+Route::get('/dashboard/barang-masuk', [BarangMasukController::class, 'index'])->name('barang-masuk.create');
+Route::get('/get-produk', [DashboardProductController::class, 'get'])->name('produk.get');
+Route::get('/get-produk-detail', [DashboardProductController::class, 'getDetail'])->name('produk.get-detail');
+
+Route::get('/get-barang-masuk', [BarangMasukController::class, 'get'])->name('barang-masuk.get');
+Route::post('/barang-masuk', [BarangMasukController::class, 'create'])->name('barang-masuk.create');
+

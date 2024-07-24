@@ -13,21 +13,23 @@
             <thead>
             <tr>
                 <th style="width: 15px">No</th>
-                <th>Name</th>
-                <th>Category</th>
+                <th>Nama Produk</th>
+                <th>PLU</th>
+                <th>Kategori</th>
                 <th>Produsen</th>
-                <th>Amount</th>
+                <th>Stock</th>
                 <th>Unit</th>
-                <th>Price</th>
-                <th>Action</th>
+                <th>Harga</th>
+                <th>Aksi</th>
             </tr>
             </thead>
             <tbody style="height: 10px !important; overflow: scroll; ">
-            
-            @foreach ($products as $product)    
+
+            @foreach ($products as $product)
             <tr>
                 <td class="filterable-cell">{{ $loop->iteration }}</td>
                 <td class="filterable-cell">{{ $product->name }}</td>
+                <td class="filterable-cell">{{ $product->plu }}</td>
                 <td class="filterable-cell">{{ $product->Category->name }}</td>
                 <td class="filterable-cell">{{ $product->produsen }}</td>
                 <td class="filterable-cell">{{ $product->stock }}</td>
@@ -45,9 +47,9 @@
                 </td>
             </tr>
             @endforeach
-            
+
             </tbody>
-            
+
         </table>
     </div>
 </div>

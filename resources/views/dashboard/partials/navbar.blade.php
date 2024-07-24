@@ -36,10 +36,19 @@
                   <li><a class="dropdown-item" href="/dashboard/products/create"><i class="bi bi-plus-circle"></i> Add product</a></li>
                 </ul>
               </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle {{ Request::is('dashboard/barang*') ? 'active' : '' }} {{ Request::is('dashboard/categories*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-view-list"></i> Inventory</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/dashboard/barang-masuk"><i class="bi bi-view-list"></i> Barang Masuk</a></li>
+                  <li><a class="dropdown-item" href="/dashboard/barang-keluar"><i class="bi bi-view-stacked"></i> Barang Keluar</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                </ul>
+              </li>
               @endauth
           </ul>
 
-          
+
           <li class="nav-item">
             <a class="nav-link {{ Request::is('info') ? 'active' : '' }}" href="/info"><i class="bi bi-info-circle"></i> Info</a>
           </li>
@@ -50,7 +59,7 @@
             </form>
           </li>
         </ul>
-        
+
       </div>
     </div>
 </nav>
