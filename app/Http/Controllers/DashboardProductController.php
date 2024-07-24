@@ -170,7 +170,8 @@ class DashboardProductController extends Controller
 
     public function get(Request $request)
     {
-        $data = DB::table('products')->where('name', 'LIKE', "%$request->search%")->get(['plu', 'name']);
+        $data = DB::table('products')->where('name', 'LIKE', "%$request->search%")
+        ->where('unit', 'KARTON')->get(['plu', 'name']);
         $kategori = $data->map(function ($value) {
             return [
                 'id' => $value->plu,

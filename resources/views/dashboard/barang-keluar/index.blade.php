@@ -28,13 +28,16 @@
 
     <div class="col-md-4">
         <form method="POST" id="proses-barang">
-            <p>Barang Masuk</p>
+            <p>Barang Keluar</p>
             <div class="input-group flex-nowrap mb-1">
                 <select name="plu" id="plu" class="form-control"></select>
             </div>
 
             <div class="input-group flex-nowrap mb-1">
                 <input type="text" name="detail_produk" id="detail_produk" class="form-control" placeholder="PLU Barang" @disabled(true)>
+                <span class="input-group-text">Stock</span>
+                <input type="number" name="stock" id="stock" class="form-control" @disabled(true) value="0">
+                <input type="number" id="stock_hidden" hidden>
             </div>
 
             <div class="input-group flex-nowrap mb-1">
@@ -65,7 +68,7 @@
 $(function(){
     let tabel = $('#tabel-barang-masuk').DataTable({
         ajax: {
-            url: `{{ route('barang-masuk.get') }}`,
+            url: `{{ route('barang-keluar.get') }}`,
             type: 'GET',
         },
         processing: true,
@@ -96,8 +99,7 @@ function getProduk(){
     $('#plu').select2({
             placeholder: 'Pilih Barang ...',
             ajax: {
-                // http://gudangkita.test/get-produk
-                url: '{{ route('produk.get') }}',
+                url: '{{ route('barang-keluar.search') }}',
                 data: function (params) {
                     var query = {
                     search: params.term,
@@ -115,7 +117,7 @@ function getProduk(){
 }
 
 $('#plu').on('change', function(){
-    const plu = $(this).val();
+    const plu = parseInt($(this).val());
     $.get(`{{ route('produk.get-detail') }}`, {
         'plu': plu
     })
@@ -124,9 +126,13 @@ $('#plu').on('change', function(){
 
         $('#detail_produk').val(response.data['plu']);
         $('#price_number').val(response.data['price']);
+        $('#stock').val(response.data['stock']);
+        $('#stock_hidden').val(response.data['stock']);
         $('#unit').val(response.data['unit']);
         $('#harga_produk').val(harga);
         $('#price').val(harga);
+
+        checkStock();
     })
     .fail((response) =>{
         console.log(response);
@@ -135,7 +141,7 @@ $('#plu').on('change', function(){
 });
 
 $('#jumlah').on('change', function(){
-    let jumlah = $(this).val();
+    let jumlah = parseInt($(this).val());
 
     let plu = $('#plu').val();
     if(plu == null){
@@ -160,29 +166,43 @@ $('#proses-barang').submit(function(e){
     if(plu == null){
         $(this).val(0);
         alert('Belum ada barang yang dipilih');
-    }
-
-    if(confirm('Lanjut proses barang masuk?')){
-        $.ajax({
-            url: `{{ route('barang-masuk.create') }}`,
-            data: new FormData(this),
-            method: 'POST',
-            contentType: false,
-            processData: false,
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        })
-        .done((response) =>{
-            $('#proses-barang')[0].reset();
-            $('#plu').empty().trigger('change');
-            $('#tabel-barang-masuk').DataTable().ajax.reload();
-        })
-    } else {
         return;
     }
 
+    if(!checkStock()){
+        return;
+    } else {
+
+        if(confirm('Lanjut proses barang keluar?')){
+            $.ajax({
+                url: `{{ route('barang-keluar.create') }}`,
+                data: new FormData(this),
+                method: 'POST',
+                contentType: false,
+                processData: false,
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+            .done((response) =>{
+                $('#proses-barang')[0].reset();
+                $('#plu').empty().trigger('change');
+                $('#tabel-barang-masuk').DataTable().ajax.reload();
+            })
+        }
+
+    }
+
 })
+
+function checkStock(){
+    if(parseInt($('#jumlah').val()) > parseInt($('#stock').val())){
+        alert('Jumlah stock tidak mencukupi');
+        return false;
+    }
+
+    return true;
+}
 
 </script>
 @endpush

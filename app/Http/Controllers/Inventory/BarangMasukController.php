@@ -31,7 +31,7 @@ class BarangMasukController extends Controller
         ]);
 
         $invno = new HelperController();
-        $barangMasuk->invno = $invno->buatInvnoBarang($barangMasuk->created_at, $barangMasuk->id);
+        $barangMasuk->invno = $invno->buatInvnoBarang($barangMasuk->created_at, $barangMasuk->id, "IN");
         $barangMasuk->save();
 
         $produk->stock = $produk->stock + $request->jumlah;
@@ -40,10 +40,13 @@ class BarangMasukController extends Controller
         return response()->json($barangMasuk);
     }
 
-    public function get()
+    public function get(Request $request)
     {
         $data = DB::table('barang_masuk')->join('products', 'products.plu', 'barang_masuk.plu')
-        ->select('barang_masuk.*', 'products.name AS nama_produk', 'products.produsen', 'products.stock')->get();
+        ->where('barang_masuk.invno', 'LIKE', "%$request->jenis%")
+        ->select('barang_masuk.*', 'products.name AS nama_produk', 'products.produsen', 'products.stock')
+        ->orderBy('barang_masuk.created_at', 'desc')
+        ->get();
 
         foreach ($data as $key => $value) {
             $value->nomor = $key+1;

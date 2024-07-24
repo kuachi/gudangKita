@@ -13,9 +13,9 @@ class HelperController extends Controller
         return $plu;
     }
 
-    public function buatInvnoBarang($tanggal, $id)
+    public function buatInvnoBarang($tanggal, $id, $tipe)
     {
-        $invno = "INV-IN" . $tanggal->format('ymd') . str_pad($id, 6, 0, STR_PAD_LEFT);
+        $invno = "INV-$tipe" . $tanggal->format('ymd') . str_pad($id, 6, 0, STR_PAD_LEFT);
         return $invno;
     }
 }

@@ -18,35 +18,53 @@ class ProdukSeeder extends Seeder
     public function run()
     {
         DB::select('TRUNCATE products');
+        $data = [
+            [
+                'name' => 'ROKOK CTN',
+                'category_id' => 1,
+                'slug' => 'rokok-ctn',
+                'produsen' => 'CV. BASMALAH GROUP',
+                'unit' => 'KARTON',
+                'price' => 6800000,
+                'stock' => 0,
+                'jenis_plu' => 'RAW',
+            ],
+            [
+                'name' => 'SANTAN CTN',
+                'category_id' => 1,
+                'slug' => 'santan-ctn',
+                'produsen' => 'CV. BASMALAH GROUP',
+                'unit' => 'KARTON',
+                'price' => 223000,
+                'stock' => 0,
+                'jenis_plu' => 'RAW',
+            ],
+            [
+                'name' => 'ROKOK KONV',
+                'category_id' => 3,
+                'slug' => 'rokok-konv',
+                'produsen' => 'CV. BASMALAH GROUP-KONV',
+                'unit' => 'BAL',
+                'price' => 340000,
+                'stock' => 0,
+                'jenis_plu' => 'KONV',
+            ],
+        ];
 
-        $produk = new Product();
-        $produk->category_id = 1;
-        $produk->name = 'ROKOK';
-        $produk->slug = 'rokok';
-        $produk->produsen = 'CV. BASMALAH GROUP';
-        $produk->unit = 'KARTON';
-        $produk->price = 6800000;
-        $produk->stock = 0;
-        $produk->save();
+        $plu = new HelperController();
+        foreach ($data as $key => $value) {
+            Product::create([
+                'category_id' => $value['category_id'],
+                'name' => $value['name'],
+                'slug' => $value['slug'],
+                'produsen' => $value['produsen'],
+                'stock' => $value['stock'],
+                'unit' => $value['unit'],
+                'price' => $value['price'],
+                'jenis_plu' => $value['jenis_plu'],
+                'plu' => $plu->buatPlu(now(), $key+1)
+            ]);
+        }
 
-        $helper = new HelperController();
-        $produk->update([
-            'plu' => $helper->buatPlu(now(), $produk->id)
-        ]);
-
-        $produk = new Product();
-        $produk->category_id = 1;
-        $produk->name = 'SANTAN';
-        $produk->slug = 'santan';
-        $produk->produsen = 'CV. BASMALAH GROUP';
-        $produk->unit = 'KARTON';
-        $produk->price = 200000;
-        $produk->stock = 0;
-        $produk->save();
-
-        $helper = new HelperController();
-        $produk->update([
-            'plu' => $helper->buatPlu(now(), $produk->id)
-        ]);
     }
 }

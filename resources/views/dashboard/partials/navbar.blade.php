@@ -30,19 +30,20 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle {{ Request::is('dashboard/products*') ? 'active' : '' }} {{ Request::is('dashboard/categories*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-view-list"></i> Gudang</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/dashboard/products"><i class="bi bi-view-list"></i> All products</a></li>
-                  <li><a class="dropdown-item" href="/dashboard/categories"><i class="bi bi-view-stacked"></i> All categories</a></li>
+                  <li><a class="dropdown-item" href="{{ route('products.index') }}"><i class="bi bi-view-list"></i> All products</a></li>
+                  <li><a class="dropdown-item" href="{{ route('categories.index') }}"><i class="bi bi-view-stacked"></i> All categories</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="/dashboard/products/create"><i class="bi bi-plus-circle"></i> Add product</a></li>
+                  <li><a class="dropdown-item" href="{{ route('products.create') }}"><i class="bi bi-plus-circle"></i> Add product</a></li>
                 </ul>
               </li>
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle {{ Request::is('dashboard/barang*') ? 'active' : '' }} {{ Request::is('dashboard/categories*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-view-list"></i> Inventory</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/dashboard/barang-masuk"><i class="bi bi-view-list"></i> Barang Masuk</a></li>
-                  <li><a class="dropdown-item" href="/dashboard/barang-keluar"><i class="bi bi-view-stacked"></i> Barang Keluar</a></li>
+                  <li><a class="dropdown-item" href="{{ route('barang-masuk.index') }}"><i class="bi bi-view-list"></i> Barang Masuk</a></li>
+                  <li><a class="dropdown-item" href="{{ route('barang-keluar.index') }}"><i class="bi bi-view-stacked"></i> Barang Keluar</a></li>
                   <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{{ route('konversi.index') }}"><i class="bi bi-view-stacked"></i> Konversi Barang</a></li>
                 </ul>
               </li>
               @endauth
